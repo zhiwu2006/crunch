@@ -2,7 +2,7 @@
 
 ## Overview
 
-First of all, thanks goes to the Chromebrew framework maintainers for their work which was actively used when creating this project and to MrChromebox for its UEFI Full ROMs.
+First of all, thanks go to the Chromebrew framework maintainers for their work which was actively used when creating this project and to MrChromebox for its UEFI Full ROMs.
 
 The Crunch framework purpose is to be able to boot your Chromebook's native ChromeOS build after flashing MrChromebox UEFI Full ROM firmware. Crunch will only run the official image built by google for your chromebook, if you want to install another recovery image on your chromebook, you have to use Brunch.
 
@@ -24,7 +24,7 @@ Additional features:
 
 # Install instructions
 
-You can install ChromeOS on a USB flash drive / SD card (16GB minimum) or as an image on your hard disk for dual booting (14GB of free space needed).
+You can install ChromeOS on a USB flash drive or as an image on an HDD for dual booting (14GB of free space needed).
 
 ## Install ChromeOS from Linux (the easiest way)
 
@@ -33,7 +33,7 @@ You can install ChromeOS on a USB flash drive / SD card (16GB minimum) or as an 
 - root access.
 - `pv`, `tar`, `cgpt` and `vbutil_kernel` packages/binaries.
 
-### Install ChromeOS on a USB flash drive / SD card
+### Install ChromeOS on a USB flash drive
 
 1. Download your device ChromeOS recovery image and extract it.
 2. Download the Crunch release corresponding to the ChromeOS recovery image version you have downloaded (from the GitHub release section).
@@ -42,12 +42,12 @@ You can install ChromeOS on a USB flash drive / SD card (16GB minimum) or as an 
 ```
 tar zxvf crunch_< version >.tar.gz
 ```
-5. Identify your USB flash drive / SD card device name e.g. /dev/sdX (Be careful here as the installer will erase all data on the target drive)
-6. Install ChromeOS on the USB flash drive / SD card:
+5. Identify your USB flash drive device name e.g. /dev/sdX (Be careful here as the installer will erase all data on the target drive)
+6. Install ChromeOS on the USB flash drive:
 ```
-sudo bash chromeos-install.sh -src < path to the ChromeOS recovery image > -dst < your USB flash drive / SD card device. e.g. /dev/sdX >
+sudo bash chromeos-install.sh -src < path to the ChromeOS recovery image > -dst < your USB flash drive device. e.g. /dev/sdX >
 ```
-7. Reboot your computer and boot from the USB flash drive / SD card (refer to your computer manufacturer's online resources).
+7. Reboot your computer and boot from the USB flash drive (refer to your computer manufacturer's online resources).
 
 The GRUB menu should appear, select ChromeOS and after a few minutes (the Crunch framework is building itself on the first boot), you should be greeted by ChromeOS startup screen. You can now start using ChromeOS.
 
@@ -57,7 +57,7 @@ ChromeOS partition scheme is very specific which makes it difficult to dual boot
 
 Make sure you have an ext4 or NTFS partition with at least 14gb of free space available and no encryption or create one (refer to online resources).
 
-1. Perform the steps 1 to 4 as described in the previous section (Install ChromeOS on a USB flash drive / SD card).
+1. Perform the steps 1 to 4 as described in the previous section (Install ChromeOS on a USB flash drive).
 2. Mount the unencrypted ext4 or NTFS partition on which we will create the disk image to boot from:
 ```
 mkdir -p ~/tmpmount
@@ -69,7 +69,7 @@ sudo bash chromeos-install.sh -src < path to the ChromeOS recovery image > -dst 
 ```
 4. Copy the GRUB configuration which appears in the terminal at the end of the process (between lines with stars) to either:
 - your hard disk GRUB install if you have one (refer to you distro's online resources).
-- the USB flash drive / SD card GRUB config file (then boot from USB flash drive / SD card and choose "boot from disk image" in the GRUB menu),
+- the USB flash drive GRUB config file (then boot from USB flash drive and choose "boot from disk image" in the GRUB menu),
 5. Unmout the destination partition
 ```
 sudo umount ~/tmpmount
@@ -84,7 +84,7 @@ The GRUB menu should appear, select "ChromeOS (boot from disk image)" and after 
 
 - Administrator access.
 
-### Install ChromeOS on a USB flash drive / SD card
+### Install ChromeOS on a USB flash drive
 
 1. Download your device ChromeOS recovery image and extract it.
 2. Download the Crunch release corresponding to the ChromeOS recovery version you have downloaded (from the GitHub release section).
@@ -106,22 +106,22 @@ sudo tar zxvf crunch_< version >.tar.gz
 ```
 sudo bash chromeos-install.sh -src < path to the ChromeOS recovery image > -dst chromeos.img
 ```
-9. Use "Rufus" (https://rufus.ie/) to write the chromeos.img to the USB flash drive / SD card.
-10. Reboot your computer and boot from the USB flash drive / SD card (refer to your computer manufacturer's online resources).
+9. Use "Rufus" (https://rufus.ie/) to write the chromeos.img to the USB flash drive.
+10. Reboot your computer and boot from the USB flash drive (refer to your computer manufacturer's online resources).
 11. The GRUB menu should appear, select ChromeOS and after a few minutes (the Crunch framework is building itself on the first boot), you should be greeted by ChromeOS startup screen.
-At this stage, your USB flash drive / SD card is incorrectly recognized as 14GB regardless of its actual capacity. To fix this:
+At this stage, your USB flash drive is incorrectly recognized as 14GB regardless of its actual capacity. To fix this:
 13. At the ChromeOS startup screen, press CTRL+ALT+F2 to go into a shell session.
 14. Login as `root`
 15. Execute the below command:
 ```
 sudo resize-data
 ```
-16. Reboot your computer when requested and boot again from USB flash drive / SD card. You can now start using ChromeOS.
+16. Reboot your computer when requested and boot again from USB flash drive. You can now start using ChromeOS.
 
 ### Dual Boot ChromeOS from your HDD
 
 1. Make sure you have a NTFS partition with at least 14gb of free space available and no BitLocker encryption or create one (refer to online resources).
-2. Create a ChromeOS USB flash drive / SD card using the above method (Install ChromeOS on a USB flash drive / SD card) and boot it.
+2. Create a ChromeOS USB flash drive using the above method (Install ChromeOS on a USB flash drive) and boot it.
 3. Open the ChromeOS shell (CTRL+ALT+T and enter `shell` at the invite)
 4. Mount the unencrypted ext4 or NTFS partition on which we will create the disk image to boot from:
 ```
@@ -137,22 +137,22 @@ sudo bash chromeos-install -dst ~/tmpmount/chromeos.img -s < size you want to gi
 ```
 sudo umount ~/tmpmount
 ```
-8. Reboot your computer and boot from USB flash drive / SD card.
+8. Reboot your computer and boot from USB flash drive.
 
 The GRUB menu should appear, select "ChromeOS (boot from disk image)" and you should be greeted by ChromeOS startup screen. You can now start using ChromeOS from your HDD.
 
 ## Install ChromeOS on HDD from ChromeOS
 
-1. Boot your ChromeOS USB flash drive / SD card.
+1. Boot your ChromeOS USB flash drive.
 2. Open the ChromeOS shell (CTRL+ALT+T and enter `shell` at the invite)
 3. Identify your HDD device name e.g. /dev/sdX (Be careful here as the installer will erase all data on the target drive)
 4. Install ChromeOS to HDD:
 ```
 sudo chromeos-install -dst < your HDD device. e.g. /dev/sdX >
 ```
-5. Shutdown your computer and remove your ChromeOS USB flash drive / SD card.
+5. Shutdown your computer and remove your ChromeOS USB flash drive.
 
-Note: Even if you boot from GRUB on your HDD, if you have a ChromeOS USB flash drive / SD card inserted, the initramfs will boot from it in priority.
+Note: Even if you boot from GRUB on your HDD, if you have a ChromeOS USB flash drive inserted, the initramfs will boot from it in priority.
 
 The GRUB menu should appear, select ChromeOS and after a few minutes (the Crunch framework is building itself on the first boot), you should be greeted by ChromeOS startup screen. You can now start using ChromeOS.
 
